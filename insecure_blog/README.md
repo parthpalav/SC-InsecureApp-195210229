@@ -1,8 +1,8 @@
-# 🔓 Insecure Blog - Educational Security Demo
+#  Insecure Blog - Educational Security Demo
 
-⚠️ **WARNING**: This application is **INTENTIONALLY VULNERABLE** and should **NEVER** be deployed in a production environment or exposed to the internet!
+ **WARNING**: This application is **INTENTIONALLY VULNERABLE** and should **NEVER** be deployed in a production environment or exposed to the internet!
 
-## 📚 Purpose
+##  Purpose
 
 This PHP web application is designed for educational purposes to demonstrate common web security vulnerabilities including:
 
@@ -15,7 +15,7 @@ This PHP web application is designed for educational purposes to demonstrate com
 - **No Session Timeout**
 - **CSRF Vulnerabilities**
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 insecure_blog/
@@ -34,7 +34,7 @@ insecure_blog/
     └── style.css       # Styling
 ```
 
-## 🔧 Setup Instructions
+##  Setup Instructions
 
 ### Prerequisites
 
@@ -79,7 +79,7 @@ Open browser and navigate to:
 http://localhost/insecure_blog/
 ```
 
-## 👤 Test Accounts
+##  Test Accounts
 
 | Username | Email | Password | Role |
 |----------|-------|----------|------|
@@ -88,7 +88,7 @@ http://localhost/insecure_blog/
 | jane_smith | jane@test.com | jane456 | user |
 | test_user | test@test.com | test | user |
 
-## 🎯 Vulnerability Demonstrations
+##  Vulnerability Demonstrations
 
 ### 1️⃣ SQL Injection (Login Page)
 
@@ -256,7 +256,7 @@ After exploring this application, you should understand:
 6. The dangers of trusting user input
 7. Why proper access control is critical
 
-## ⚠️ Security Disclaimer
+##  Security Disclaimer
 
 This application:
 - Must ONLY be used in isolated, local development environments
@@ -265,7 +265,7 @@ This application:
 - Demonstrates what NOT to do in production code
 - Should be deleted after learning exercise is complete
 
-## 📝 Assignment Notes
+##  Assignment Notes
 
 For Secure Coding Lab Experiment 4:
 - Document each vulnerability you find
@@ -274,7 +274,7 @@ For Secure Coding Lab Experiment 4:
 - Test all vulnerabilities systematically
 - Take screenshots for your report
 
-## 🔗 Resources
+##  Resources
 
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
 - [SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
