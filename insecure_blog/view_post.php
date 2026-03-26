@@ -1,11 +1,5 @@
 <?php
-/*
- * VULNERABILITY: STORED XSS + SQL INJECTION
- * - No output escaping with htmlspecialchars()
- * - Direct echo of user-generated content
- * - SQL Injection in query parameter
- * - Executes any JavaScript from database
- */
+
 
 session_start();
 require_once 'db.php';
@@ -15,14 +9,14 @@ if (!isset($_GET['id'])) {
     exit();
 }
 
-// VULNERABLE: SQL Injection via GET parameter
+
 $post_id = $_GET['id'];
 $query = "SELECT posts.*, users.username FROM posts JOIN users ON posts.user_id = users.id WHERE posts.id = $post_id";
 
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
-    // VULNERABLE: Information leakage
+    
     die("Error: " . mysqli_error($conn));
 }
 
@@ -50,7 +44,7 @@ if (!$post) {
     
     <div class="container">
         <div class="post-full">
-            <!-- VULNERABLE: Stored XSS - Direct output without escaping -->
+            
             <h1><?php echo $post['title']; ?></h1>
             
             <p class="meta">
@@ -59,7 +53,7 @@ if (!$post) {
             </p>
             
             <div class="post-content">
-                <!-- VULNERABLE: This will execute any JavaScript stored in database -->
+                
                 <?php echo $post['content']; ?>
             </div>
             

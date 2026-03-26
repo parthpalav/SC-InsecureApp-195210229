@@ -1,11 +1,5 @@
 <?php
-/*
- * VULNERABILITY: NO PASSWORD HASHING
- * - Passwords stored in plain text
- * - No input validation
- * - No SQL injection protection
- * - No XSS protection on username/email
- */
+
 
 session_start();
 require_once 'db.php';
@@ -14,13 +8,13 @@ $error = "";
 $success = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // VULNERABLE: No input sanitization
+    
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $role = 'user'; // Default role
+    $role = 'user'; 
     
-    // VULNERABLE: SQL Injection possible, plain text password
+    
     $query = "INSERT INTO users (username, email, password, role) VALUES ('$username', '$email', '$password', '$role')";
     
     $result = mysqli_query($conn, $query);
@@ -28,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result) {
         $success = "Registration successful! You can now login.";
     } else {
-        // VULNERABLE: Information leakage - showing raw SQL error
+        
         $error = "Registration failed: " . mysqli_error($conn);
     }
 }
@@ -53,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h1>Register</h1>
         
         <?php if ($error): ?>
-            <!-- VULNERABLE: Displaying raw error messages -->
+            
             <div class="error"><?php echo $error; ?></div>
         <?php endif; ?>
         

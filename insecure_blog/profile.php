@@ -1,15 +1,5 @@
 <?php
-/*
- * VULNERABILITY: IDOR + REFLECTED XSS
- * - Insecure Direct Object Reference
- * - No ownership check
- * - Any user can view any profile
- * - Reflected XSS via GET parameter
- * - SQL Injection in query
- * 
- * EXPLOIT IDOR: Change ?id=1 to ?id=2 to view other users' profiles
- * EXPLOIT XSS: Try profile.php?id=<script>alert('XSS')</script>
- */
+
 
 session_start();
 
@@ -25,16 +15,16 @@ if (!isset($_GET['id'])) {
     exit();
 }
 
-// VULNERABLE: Reflected XSS - displaying GET parameter directly
+
 $requested_id = $_GET['id'];
 
-// VULNERABLE: SQL Injection - no validation
+
 $query = "SELECT * FROM users WHERE id = $requested_id";
 
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
-    // VULNERABLE: Information leakage
+    
     die("Error: " . mysqli_error($conn));
 }
 
@@ -44,10 +34,10 @@ if (!$profile_user) {
     die("User not found!");
 }
 
-// VULNERABLE: No ownership check!
-// MISSING: if ($profile_user['id'] != $_SESSION['user_id']) { die("Access denied!"); }
 
-// Get user's posts
+
+
+
 $posts_query = "SELECT * FROM posts WHERE user_id = $requested_id ORDER BY id DESC";
 $posts_result = mysqli_query($conn, $posts_query);
 ?>
@@ -76,12 +66,12 @@ $posts_result = mysqli_query($conn, $posts_query);
         </div>
         
         <div class="profile-info">
-            <!-- VULNERABLE: Reflected XSS - Direct output of GET parameter -->
+            
             <p><strong>Viewing profile of user ID:</strong> <?php echo $_GET['id']; ?></p>
             
             <p><strong>Username:</strong> <?php echo $profile_user['username']; ?></p>
             <p><strong>Email:</strong> <?php echo $profile_user['email']; ?></p>
-            <!-- VULNERABLE: Displaying plain text password -->
+            
             <p><strong>Password (Plain):</strong> <?php echo $profile_user['password']; ?></p>
             <p><strong>Role:</strong> <?php echo $profile_user['role']; ?></p>
         </div>

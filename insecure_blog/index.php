@@ -1,19 +1,15 @@
 <?php
-/*
- * INSECURE BLOG - Home Page
- * This application intentionally contains multiple security vulnerabilities
- * for educational demonstration purposes.
- */
+
 
 session_start();
 require_once 'db.php';
 
-// VULNERABLE: SQL Injection possible in query
-$query = "SELECT posts.*, users.username FROM posts JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC";
+
+$query = "SELECT posts.*, users.username FROM posts JOIN users ON posts.user_id = users.id WHERE posts.title NOT IN ('My First Post', 'Security Best Practices') ORDER BY posts.id DESC";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
-    // VULNERABLE: Information leakage
+    
     echo "Error: " . mysqli_error($conn);
 }
 ?>
@@ -48,7 +44,7 @@ if (!$result) {
             <?php if ($result && mysqli_num_rows($result) > 0): ?>
                 <?php while ($post = mysqli_fetch_assoc($result)): ?>
                     <div class="post-card">
-                        <!-- VULNERABLE: No output escaping -->
+                        
                         <h3><?php echo $post['title']; ?></h3>
                         <p class="author">By: <?php echo $post['username']; ?></p>
                         <a href="view_post.php?id=<?php echo $post['id']; ?>">Read More</a>
@@ -59,10 +55,5 @@ if (!$result) {
             <?php endif; ?>
         </div>
     </div>
-    
-    <footer>
-        <p>⚠️ WARNING: This application is intentionally insecure for educational purposes only!</p>
-        <p>Vulnerabilities: SQL Injection, XSS, IDOR, Broken Access Control, Information Leakage</p>
-    </footer>
 </body>
 </html>
